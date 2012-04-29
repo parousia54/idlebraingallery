@@ -1,13 +1,16 @@
 package com.parousia.idlebrain.network;
 
+import java.io.BufferedReader;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.net.URI;
-import java.net.URLConnection;
+import java.net.URL;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.HttpVersion;
+import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.conn.params.ConnManagerParams;
@@ -38,9 +41,6 @@ public class HTTPUtility {
 	public static byte[] fetchImage(URI url) {
 		
 		setupNetwork();
-		
-		URLConnection conn;
-		InputStream is = null;
 		try {
 			SchemeRegistry schReg = new SchemeRegistry();
 			schReg.register(new Scheme("http", PlainSocketFactory.getSocketFactory(), HTTP_PORT));
@@ -92,6 +92,34 @@ public class HTTPUtility {
 		HttpProtocolParams.setContentCharset(connParams, HTTP.UTF_8);
 		HttpConnectionParams.setSoTimeout(connParams, SOCKET_TIMEOUT);
 		
+		
+	}
+
+	public static String fetchHTML(URI url) {
+		
+		String html = "";
+		HttpClient client = new DefaultHttpClient();
+		HttpGet request = new HttpGet(url);
+		HttpResponse response;
+		try {
+			response = client.execute(request);
+			InputStream in = response.getEntity().getContent();
+			BufferedReader reader = new BufferedReader(new InputStreamReader(in));
+			StringBuilder str = new StringBuilder();
+			String line = null;
+			while((line = reader.readLine()) != null)
+			{
+			    str.append(line);
+			}
+			in.close();
+			html = str.toString();
+		} catch (ClientProtocolException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return html;
+
 		
 	}
 }

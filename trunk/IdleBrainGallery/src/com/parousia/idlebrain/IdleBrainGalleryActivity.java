@@ -7,7 +7,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 import android.app.Activity;
-import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Bitmap;
@@ -40,7 +39,7 @@ public class IdleBrainGalleryActivity extends Activity {
 		requestWindowFeature(Window.FEATURE_PROGRESS);
 		setProgress(10);
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.main);
+		setContentView(R.layout.galleryview);
 
 		for (int i = 1; i < 44; i++) {
 			imgSrc.add("http://idlebrain.com/movie/photogallery/kajalagarwal140/images/kajalagarwal"
