@@ -15,7 +15,7 @@ public class IdleBrainApplicationConstants {
 			+ "("
 			+ "_id integer,"
 			+ "   name  text not null,"
-			+ "   PRIMARY KEY (_id, type_id)";
+			+ "   PRIMARY KEY (_id))";
 
 	public static final String CREATE_HEROINES_LINKS_TB = "create table IF NOT EXISTS "
 			+ TABLE_HEROINES_LINKS
@@ -24,6 +24,6 @@ public class IdleBrainApplicationConstants {
 			+ "   heroine_id   integer not null,"
 			+ "   name  text not null,"
 			+ "   link  text not null,"
-			+ "   FOREIGN KEY(heroine_id) REFERENCES HEROINES(_id))";
+			+ "   FOREIGN KEY(heroine_id) REFERENCES TABLE_HEROINES(_id))";
 
 }

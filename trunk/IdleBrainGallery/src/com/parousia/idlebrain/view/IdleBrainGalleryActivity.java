@@ -1,4 +1,4 @@
-package com.parousia.idlebrain;
+package com.parousia.idlebrain.view;
 
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -23,6 +23,7 @@ import android.widget.BaseAdapter;
 import android.widget.Gallery;
 import android.widget.ImageView;
 
+import com.parousia.idlebrain.R;
 import com.parousia.idlebrain.network.HTTPUtility;
 
 public class IdleBrainGalleryActivity extends Activity {
