@@ -1,4 +1,4 @@
-package com.parousia.idlebrain;
+package com.parousia.idlebrain.view;
 
 import java.util.ArrayList;
 
@@ -19,9 +19,10 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.parousia.dummy.Cheeses;
+import com.parousia.idlebrain.R;
 import com.parousia.idlebrain.data.DataHelper;
 
-public class IdleBrainHomeScreenActivity extends FragmentActivity {
+public class IdleBrainHomeScreenActivity extends IdleBrainScreen implements Updater {
 
 	static final int NUM_PAGES = 3;
 	IdleBrainPagerAdapter idleBrainPagerAdapter;
@@ -31,10 +32,13 @@ public class IdleBrainHomeScreenActivity extends FragmentActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.homescreen);
+		displayProgress("Updating database..");
+		
+		
 		idleBrainPagerAdapter = new IdleBrainPagerAdapter(
 				getSupportFragmentManager());
-		 viewPager = (ViewPager)findViewById(R.id.pager);
-	        viewPager.setAdapter(idleBrainPagerAdapter);
+		viewPager = (ViewPager) findViewById(R.id.pager);
+		viewPager.setAdapter(idleBrainPagerAdapter);
 	}
 
 	public static class IdleBrainPagerAdapter extends FragmentPagerAdapter {
@@ -99,7 +103,7 @@ public class IdleBrainHomeScreenActivity extends FragmentActivity {
 			@Override
 			public void onActivityCreated(Bundle savedInstanceState) {
 				super.onActivityCreated(savedInstanceState);
-				
+
 				fetchHeroineList();
 				setListAdapter(new ArrayAdapter<String>(getActivity(),
 						android.R.layout.simple_list_item_1,
@@ -111,16 +115,15 @@ public class IdleBrainHomeScreenActivity extends FragmentActivity {
 					long id) {
 				Log.i("FragmentList", "Item clicked: " + id);
 			}
-			
-			public void fetchHeroineList()
-			{
+
+			public void fetchHeroineList() {
 
 				AsyncTask<Object, Integer, ArrayList<String>> task = new AsyncTask<Object, Integer, ArrayList<String>>() {
 
 					@Override
 					protected void onPreExecute() {
 						super.onPreExecute();
-//						setProgressBarIndeterminateVisibility(true);
+						// setProgressBarIndeterminateVisibility(true);
 					}
 
 					@Override
@@ -130,8 +133,8 @@ public class IdleBrainHomeScreenActivity extends FragmentActivity {
 
 					@Override
 					protected void onPostExecute(ArrayList<String> result) {
-//						setProgressBarIndeterminateVisibility(false);
-//						bitMapCache.put(position, result);
+						// setProgressBarIndeterminateVisibility(false);
+						// bitMapCache.put(position, result);
 					}
 
 				};

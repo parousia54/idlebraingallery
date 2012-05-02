@@ -16,7 +16,7 @@ import com.parousia.idlebrain.data.IdleBrainHeroineList;
 public class IdleBrainDataAccessHelper {
 
 	public static int getTypeID(String table, String name,
-			DatabaseManager dbManager) {
+			IdleBrainDatabaseManager dbManager) {
 		Cursor cursor = dbManager.getValues(table, null, "name='" + name + "'",
 				null, null, null, null);
 		cursor.moveToFirst();
@@ -24,7 +24,7 @@ public class IdleBrainDataAccessHelper {
 	}
 
 	public static ArrayList<IdleBrainHeroine> getHeroinesListFromDB(
-			DatabaseManager dbManager) {
+			IdleBrainDatabaseManager dbManager) {
 		ArrayList<IdleBrainHeroine> heroineList = new ArrayList<IdleBrainHeroine>();
 		Cursor cursor = getAllHeroinesCursor(dbManager);
 
@@ -40,13 +40,13 @@ public class IdleBrainDataAccessHelper {
 		return heroineList;
 	}
 
-	private static Cursor getAllHeroinesCursor(DatabaseManager dbManager) {
+	private static Cursor getAllHeroinesCursor(IdleBrainDatabaseManager dbManager) {
 		return dbManager.getValues(
 				IdleBrainApplicationConstants.TABLE_HEROINES, null, null, null,
 				null, null, null);
 	}
 
-	public static Cursor getHeroineLinksByHeroineId(DatabaseManager dbManager,
+	public static Cursor getHeroineLinksByHeroineId(IdleBrainDatabaseManager dbManager,
 			int id) {
 		return dbManager.getValues(
 				IdleBrainApplicationConstants.CREATE_HEROINES_LINKS_TB, null,
@@ -68,7 +68,7 @@ public class IdleBrainDataAccessHelper {
 
 	public static boolean updateHeroineDatabase(
 			IdleBrainHeroineList idleBrainHeroineList,
-			DatabaseManager dbManager, Handler handler) {
+			IdleBrainDatabaseManager dbManager, Handler handler) {
 
 		System.out.println("UPDATING PRODUCT DATABASE................");
 		if (cleanDatabase(dbManager)) {
@@ -86,7 +86,7 @@ public class IdleBrainDataAccessHelper {
 		}
 	}
 
-	private static boolean updateTableHeroines(DatabaseManager dbManager,
+	private static boolean updateTableHeroines(IdleBrainDatabaseManager dbManager,
 			List<IdleBrainHeroine> list, Handler handler) {
 		try {
 			int productListSize = list.size();
@@ -121,7 +121,7 @@ public class IdleBrainDataAccessHelper {
 		return true;
 	}
 
-	private static boolean cleanDatabase(DatabaseManager dbMananger) {
+	private static boolean cleanDatabase(IdleBrainDatabaseManager dbMananger) {
 		try {
 			dbMananger.deleteValues(
 					IdleBrainApplicationConstants.CREATE_HEROINES_LINKS_TB,

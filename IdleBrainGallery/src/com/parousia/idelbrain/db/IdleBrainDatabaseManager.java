@@ -9,11 +9,11 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
-public class DatabaseManager {
+public class IdleBrainDatabaseManager {
 	private MySQLiteHelper sqliteHelper;
 	private SQLiteDatabase idleBrainDBWrite, idleBrainDBRead;
 
-	public DatabaseManager(Context context) {
+	public IdleBrainDatabaseManager(Context context) {
 		sqliteHelper = new MySQLiteHelper(context);
 		openWritableDB();
 		openReadableDB();
@@ -27,12 +27,12 @@ public class DatabaseManager {
 				groupBy, having, orderBy);
 	}
 
-	public DatabaseManager openWritableDB() {
+	public IdleBrainDatabaseManager openWritableDB() {
 		idleBrainDBWrite = sqliteHelper.getWritableDatabase();
 		return this;
 	}
 
-	public DatabaseManager openReadableDB() {
+	public IdleBrainDatabaseManager openReadableDB() {
 		idleBrainDBRead = sqliteHelper.getReadableDatabase();
 		return this;
 	}
@@ -107,7 +107,9 @@ class MySQLiteHelper extends SQLiteOpenHelper {
 	}
 
 	private void createTables(SQLiteDatabase db) {
+		Log.d(IdleBrainApplicationConstants.LOGTAG, IdleBrainApplicationConstants.CREATE_HEROINES_TB);
 		db.execSQL(IdleBrainApplicationConstants.CREATE_HEROINES_TB);
+		Log.d(IdleBrainApplicationConstants.LOGTAG, IdleBrainApplicationConstants.CREATE_HEROINES_LINKS_TB);
 		db.execSQL(IdleBrainApplicationConstants.CREATE_HEROINES_LINKS_TB);
 	}
 
